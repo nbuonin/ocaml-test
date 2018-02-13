@@ -5,9 +5,23 @@ jobs:
       - image: ubuntu:latest 
     environment:
       - OCAML_VERSION: "4.06.0"
+      - OPAMYES: 1
+      - OPAMJOBS: 2
     steps:
       - checkout
-      - run: apt-get update && apt-get install -y wget
+      # Install the things we need
+      - run: apt-get update && apt-get install -y wget build-essential make m4 patch unzip git
       - run: wget -O ${HOME}/opam https://github.com/ocaml/opam/releases/download/2.0.0-rc/opam-2.0.0-rc-x86_64-linux
       - run: chmod +x ${HOME}/opam
+      # Tells opam to not ask any questons
+      #- run: export OPAMYES=1
+      #- run: export OPAMJOBS=2
+      #- run: export OPAMROOTISOK=1 I'm not sure of the correct value
       - run: ${HOME}/opam --version 
+      # Compile OCaml
+      - run: ${HOME}/opam init --compiler=${OCAML_VERSION}
+      - run: eval `${HOME}/opam config env` 
+      - run: pwd
+      - run: ${HOME}/opam pin add --no-action ocaml-test .
+      - run: ${HOME}/opam install --deps-only ocaml-test
+      - run: make
