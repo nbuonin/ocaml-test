@@ -9,4 +9,5 @@ jobs:
       - checkout
       - run: apt-get update && apt-get install -y wget
       - run: wget -O ${HOME}/opam https://github.com/ocaml/opam/releases/download/2.0.0-rc/opam-2.0.0-rc-x86_64-linux
-      - run: opam --version 
+      - run: chmod +x ${HOME}/opam
+      - run: ${HOME}/opam --version 
