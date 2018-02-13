@@ -1,8 +1,11 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.4.1
+    machine:
+      - image: circleci/classic:latest 
+    environment:
+      - OCAML_VERSION: "4.06.0"
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run: wget -O ${HOME}/opam https://github.com/ocaml/opam/releases/download/2.0.0-rc/opam-2.0.0-rc-x86_64-linux
+      - run: opam --version 
