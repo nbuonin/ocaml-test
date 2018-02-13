@@ -1,0 +1,17 @@
+opam-version: "1.2"
+name: "ocaml-test"
+version: "~unknown"
+maintainer: "Nick Buonincontri <nbuonin@gmail.com>"
+authors: "Nick Buonincontri <nbuonin@gmail.com>"
+homepage: "https://buonincontri.org"
+bug-reports: "nick@buonincontri.org"
+dev-repo: "git@github.com:nbuonin/ocaml-test.git"
+build: [
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "ocaml-test"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+]
