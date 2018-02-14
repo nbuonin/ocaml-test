@@ -22,6 +22,7 @@ jobs:
       # Compile OCaml
       - run: ${HOME}/opam init --compiler=${OCAML_VERSION}
       - run: eval `${HOME}/opam config env` 
+      - run: ln ${HOME}/opam /bin
       - run: ${HOME}/opam pin add --no-action ocaml-test .
       - run: ${HOME}/opam install --deps-only ocaml-test
       - run: make test
