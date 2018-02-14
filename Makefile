@@ -1,5 +1,20 @@
-default:
-	echo "calling Make"
+PROJECT ?= ocaml-test
+PROJECT_TOP ?= hello_world
+OCAML_SENTINAL ?= .ocaml-sentinal
+OPAM_FILE ?= opam
 
-install:
-	echo "calling make install"
+$(OCAML_SENTINAL): $(OPAM_FILE)
+	opam pin add --no-action $(PROJECT) .
+	opam install --deps-only $(PROJECT)
+	touch $@
+
+$(PROJECT_TOP).native: $(PROJECT_TOP).ml 
+	ocamlbuild $@
+
+test: $(OCAML_SENTINAL)
+	echo "This is a test that will pass"
+
+clean: $(OCAML_SENTINAL)
+	ocamlbuild -clean
+
+.PHONY: test clean

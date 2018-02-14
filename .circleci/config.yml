@@ -24,4 +24,4 @@ jobs:
       - run: eval `${HOME}/opam config env` 
       - run: ${HOME}/opam pin add --no-action ocaml-test .
       - run: ${HOME}/opam install --deps-only ocaml-test
-      - run: make
+      - run: make test
