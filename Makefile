@@ -4,17 +4,17 @@ OCAML_SENTINAL ?= .ocaml-sentinal
 OPAM_FILE ?= opam
 
 $(OCAML_SENTINAL): $(OPAM_FILE)
-	opam pin add --no-action $(PROJECT) .
-	opam install --deps-only $(PROJECT)
+	rm -rf _opam
+	opam switch create ./ -y
 	touch $@
 
-$(PROJECT_TOP).native: $(PROJECT_TOP).ml 
+$(PROJECT_TOP).native: clean $(PROJECT_TOP).ml 
 	ocamlbuild $@
 
 test: $(OCAML_SENTINAL)
 	echo "This is a test that will pass"
 
-clean: $(OCAML_SENTINAL)
+clean: 
 	ocamlbuild -clean
 
 .PHONY: test clean

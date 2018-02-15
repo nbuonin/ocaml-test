@@ -9,8 +9,6 @@ dev-repo: "git://git@github.com:nbuonin/ocaml-test.git"
 build: [
   [make]
 ]
-install: [make "install"]
-remove: ["ocamlfind" "remove" "ocaml-test"]
 depends: [
   "ocamlfind" {build & test}
   "ocamlbuild" {build & test & = "0.12.0"}
