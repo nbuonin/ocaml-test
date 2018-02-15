@@ -8,7 +8,7 @@ $(OCAML_SENTINAL): $(OPAM_FILE)
 	opam switch create ./ -y
 	touch $@
 
-$(PROJECT_TOP).native: clean $(PROJECT_TOP).ml 
+$(PROJECT_TOP).native: $(OCAML_SENTINAL) clean $(PROJECT_TOP).ml 
 	ocamlbuild $@
 
 test: $(OCAML_SENTINAL)
