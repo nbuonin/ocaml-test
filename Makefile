@@ -4,8 +4,8 @@ OCAML_SENTINAL ?= .ocaml-sentinal
 OPAM_FILE ?= opam
 
 $(OCAML_SENTINAL): $(OPAM_FILE)
-	rm -rf _opam
-	opam switch create ./ -y
+	opam pin add --no-action $(PROJECT) .
+	opam install --deps-only $(PROJECT)
 	touch $@
 
 $(PROJECT_TOP).native: $(OCAML_SENTINAL) clean $(PROJECT_TOP).ml 
